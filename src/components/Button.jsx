@@ -1,23 +1,25 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const Button = ({ children, variant = "default", size = "md", ...props }) => {
-  const baseStyles = "rounded-md transition-all duration-200";
+export default function Button({ children, variant = "default", size = "md", onClick }) {
   const variants = {
-    default: "bg-blue-500 text-white hover:bg-blue-600",
+    default: "bg-blue-500 text-white",
     ghost: "bg-transparent text-gray-600 hover:bg-gray-200",
   };
+
   const sizes = {
-    sm: "px-2 py-1 text-sm",
     md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
-    icon: "p-2 text-xl",
+    icon: "p-2 rounded-full",
   };
 
   return (
-    <button className={`${baseStyles} ${variants[variant]} ${sizes[size]}`} {...props}>
+    <motion.button
+      className={`rounded-md ${variants[variant]} ${sizes[size]} flex items-center justify-center`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={onClick}
+    >
       {children}
-    </button>
+    </motion.button>
   );
-};
-
-export default Button;
+}
